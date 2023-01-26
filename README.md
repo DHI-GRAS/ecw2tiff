@@ -1,13 +1,9 @@
 # ECW2Tiff
-Dockerized gdal+ecw installation for converting ecw files to tiff.
+Dockerized GDAL installation with ECW support.
 
-
-## Usage
+## Convert ECW to GeoTIFF:
 1. Build the image (`make build`)
-2. Put the file you need to convert under `./data`.
-3. Run `make raster input=some_file.ecw` to create `data/some_file.tiff`.
+2. Put the file you need to convert under `./data/my_file.ecw`.
+3. Run `make raster input=my_file.ecw` to create `data/my_file.tiff`.
 
-The image also has Python installed and configured for GDAL.
-
-### TODO
-GDAL installation fails on newer verions of Ubuntu
+It is also configured for Python 3.10, so you can extend the image and use it as a base for your Python projects.
