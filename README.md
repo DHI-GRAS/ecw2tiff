@@ -13,7 +13,7 @@ Python 3.10 is also installed in the image, as well as the GDAL Python bindings.
 
 The Makefile contains commands to build the Docker image and run the conversion process. It makes use of the Docker image to execute the `gdal_translate` command to convert raster data between different formats.
 
-### Variables
+#### Variables
 
 The Makefile uses the following variables:
 
@@ -21,13 +21,13 @@ The Makefile uses the following variables:
 - `INPUT`: The directory, file path or glob pattern for the .ecw files to convert. Either absolute or relative to the Makefile. Defaults to `./input`.
 - `OUTPUT_DIR`: The directory to output the resulting .tiff files. Defaults to `./output`.
 
-## Targets
+#### Targets
 The Makefile defines the following targets:
 
 - `build`: Builds the Docker image using the specified `IMAGE`.
-- `convert`: loops thorugh all files in specified in `INPUT` and converts them to .tiff files in `OUTPUT_DIR`.
+- `convert`: Converts all files specified by `INPUT` to .tiff and places the results in `OUTPUT_DIR`.
 
-## Usage
+### Usage
 
 1. Clone this repository and navigate to its directory.
 2. Build the Docker image with `make build`.
