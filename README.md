@@ -1,4 +1,4 @@
-## Docker image ECW to TIFF conversion
+## Docker image for ECW to TIFF conversion
 
 This repository contains a Dockerfile and Makefile for converting ECW files to TIFF format using GDAL in a Docker container.
 
