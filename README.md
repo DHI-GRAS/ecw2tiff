@@ -4,8 +4,10 @@ This repository contains a Dockerfile and Makefile for converting ECW files to T
 
 ### Docker Image
 
-The Docker image has GDAL build from source with the out of date libecwj 3.3 SDK for ECW support. 
-This is based heavily on  https://github.com/bogind/libecwj2-3.3 and https://trac.osgeo.org/gdal/wiki/ECW.
+The Docker image has GDAL build from source with the ECWJP2 5.5 SDK for ECW support.
+This is based heavily on  hexagon ECWJP2 SDK 5.5. The SDK needs to be downloaded manually from [here](https://supportsi.hexagon.com/s/article/ERDAS-ECW-JP2-SDK-v5-5-Update-4-Release-Announcement?language=en_US) because it requires registration and placed in next to the Dockerfile with the name `ECWJP2SDKSetup_5.5.0.2268-Update4-Linux.zip`. The SDK is then copied into the Docker image and installed.
+
+If there is no need for v3 ECW files one can use the version `v0.0.1` which does not require a manual download of the SDK.
 
 Python 3.10 is also installed in the image, as well as the GDAL Python bindings.
 

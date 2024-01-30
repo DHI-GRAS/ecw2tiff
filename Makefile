@@ -1,4 +1,4 @@
-IMAGE ?= ecw2tif:v0.0.1
+IMAGE ?= ecw2tif:v0.0.2
 INPUT ?= ./input
 OUTPUT_DIR ?= ./output
 

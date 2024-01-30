@@ -6,24 +6,26 @@ RUN apt-get update && apt-get install -y \
     g++ build-essential autoconf automake m4 libtool gcc make unzip wget swig \
     python3 python3-pip python3-dev
 
+# Run this to install gdal dependencies. Later gdal is being reinstalled from source
 RUN apt install -y libpq-dev gdal-bin libgdal-dev
 
-# Install libecwj2 (ECW 3.3 SDK)
-RUN wget https://github.com/bogind/libecwj2-3.3/raw/master/libecwj2-3.3-2006-09-06.zip \
-    && wget http://trac.osgeo.org/gdal/raw-attachment/ticket/3162/libecwj2-3.3-msvc90-fixes.patch \
-    && unzip libecwj2-3.3-2006-09-06.zip \
-    && patch -p0< libecwj2-3.3-msvc90-fixes.patch \
-    && cd libecwj2-3.3 \
-    && ./configure \
-    && make \
-    && make install \
-    && cd ..
+COPY ECWJP2SDKSetup_5.5.0.2268-Update4-Linux.zip ./ECWJP2SDKSetup_5.5.0.2268-Update4-Linux.zip
+
+# Install the official ECW JP2 SDK (ECW 5.5 SDK)
+RUN unzip ECWJP2SDKSetup_5.5.0.2268-Update4-Linux.zip \
+    && chmod +x ECWJP2SDKSetup_5.5.0.2268.bin \
+    && ./ECWJP2SDKSetup_5.5.0.2268.bin --accept-eula=YES --install-type=1  \
+    && cp -r ~/hexagon/ERDAS-ECW_JPEG_2000_SDK-5.5.0/Desktop_Read-Only /usr/local/hexagon \
+    && rm -r /usr/local/hexagon/lib/x64 \
+    && mv /usr/local/hexagon/lib/cpp11abi/x64 /usr/local/hexagon/lib/x64 \
+    && cp /usr/local/hexagon/lib/x64/release/libNCSEcw* /usr/local/lib \
+    && ldconfig /usr/local/hexagon
 
 # Install gdal 3.5.3
 RUN wget http://download.osgeo.org/gdal/3.5.3/gdal-3.5.3.tar.gz \
     && tar -xvf gdal-3.5.3.tar.gz \
     && cd gdal-3.5.3 \
-    && ./configure --with-ecw=/usr/local --with-python \
+    && ./configure --with-ecw=/usr/local/hexagon --with-python \
     && make \
     && make install
 
